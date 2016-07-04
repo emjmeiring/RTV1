@@ -20,6 +20,7 @@ static void		get_reflected_start_and_end_position(t_scene *scene)
 	scene->ray.rbegin = scene->ray_new_start;
 	reflect = 2.0f * vecdot(&scene->ray.ray_dir, &scene->vecnorm);
 	temp = vecopx(&scene->ray.ray_dir, reflect);
+	scene->ray.ray_dir = vecsub(&scene->ray.ray_dir, &temp);
 	scene->c_lvl++;
 }
 

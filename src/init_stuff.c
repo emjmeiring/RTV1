@@ -88,8 +88,9 @@ static void		init_mlx(t_mlx *mlx)
 {
 	mlx->mlx_con = (void *)malloc(sizeof(void *));
 	mlx->mlx_win = (void *)malloc(sizeof(void *));
-	mlx->img = (void *)malloc(4096);
+	mlx->img_addr = (char *)malloc(sizeof(void *));
 	mlx->mlx_con = mlx_init();
+	mlx->img = mlx_new_image(mlx->mlx_con, WIDTH, HEIGH);
 	mlx->mlx_win = mlx_new_window(mlx->mlx_con, WIDTH, HEIGH,
 					"<The Raytracer/>");
 }
@@ -99,9 +100,9 @@ void			init_all(t_scene *scene)
 	scene->y = 0;
 	scene->t = 20000.0f;
 	scene->sp_id = -1;
-	scene->spheres = (t_sphere *)malloc(sizeof(t_sphere));
-	scene->lights = (t_light *)malloc(sizeof(t_light));
-	scene->materials = (t_material *)malloc(sizeof(t_material));
+	scene->spheres = (t_sphere *)malloc(sizeof(t_sphere) * 3);
+	scene->lights = (t_light *)malloc(sizeof(t_light) * 3);
+	scene->materials = (t_material *)malloc(sizeof(t_material) * 3);
 	init_material(&scene->materials);
 	init_sphere(&scene->spheres);
 	init_lights(&scene->lights);

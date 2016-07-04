@@ -17,11 +17,12 @@ NAME = rtv1
 FLAG = -Wall -Wextra -g
 
 SRC = src/init_stuff.c src/intersections.c src/iomanips.c src/lighting.c \
-	  src/rtv1.c utils/ft_clamp.c utils/ft_vec.c utils/ft_vec2.c utils/ft_vec3.c
+	  src/rtv1.c utils/ft_clamp.c utils/ft_vec.c utils/ft_vec2.c utils/ft_vec3.c src/image_manager.c src/ray_tracer.c
 
 RM = rm -f
 
-MLX = -lmlx -framework OpenGL -framework AppKit 
+MACMLX = -lm -lmlx -framework OpenGL -framework AppKit
+LIXMLX = -lm -lmlx -lXext -lX11
 
 INC = -I /usr/include/X11 -I includes/
 
@@ -37,15 +38,20 @@ all: $(NAME)
 	@$(CC) $(FLAG) -c -o $@ $^ $(INC)
 
 $(NAME): $(OBJ)
-		@$(CC) $(FLAG) $(OBJ) -o $@ $(INC) $(MLX)
-		@echo "Manufactured\t\033[31m$@\033[0m..."
+		@echo "Linking objects with the libraries..."
+ifeq ($(CC), cc)
+		@$(CC) $(FLAG) $(OBJ) -o $@ $(INC) $(MACMLX)
+else
+		@$(CC) $(FLAG) $(OBJ) -o $@ $(INC) $(LIXMLX)
+endif
+		@echo "\033[32mDone!\033[0m\nManufactured\t\033[31m$@\033[0m..."
 
 clean:
 		@echo "Cleaning\t\033[34m$(NAME)\033[m"
 		@$(RM) $(OBJ)
 		@cd utils/ && rm -f
 		@cd src/ && rm -f
-		@echo "\t\tDone!"
+		@echo "**********Done!********"
 
 fclean: clean
 		@$(RM) $(NAME)

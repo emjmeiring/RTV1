@@ -16,6 +16,7 @@
 #define FALSE 0
 #define WIDTH 800
 #define HEIGH 600
+#define min(A, B) ((A) >= (B)) ? A : B
 #include "vector.h"
 #include <stdlib.h>
 #include <mlx.h>
@@ -92,5 +93,7 @@ int					intersecting_sphere(t_scene *scene);
 void				init_all(t_scene *scene);
 void				find_value_of_light_at_this_point(t_scene *scene);
 void				initiate_vals(t_scene *scene);
+void				follow_up_on_the_ray(t_scene *scene);
+void				construct_an_image_and_put_it_on_window(t_scene *scene);
 void				saveppm(char *filename, unsigned char *img, int width, int height);
 #endif
