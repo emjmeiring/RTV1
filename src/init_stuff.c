@@ -1,4 +1,31 @@
-#include "rtv1.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_stuff.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: simzam <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/07/04 10:58:23 by simzam            #+#    #+#             */
+/*   Updated: 2016/07/04 11:36:28 by simzam           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/rtv1.h"
+
+void		initiate_vals(t_scene *scene)
+{
+	scene->colour.red = 0;
+	scene->colour.green = 0;
+	scene->colour.blue = 0;
+	scene->c_lvl = 0;
+	scene->coef = 1.0f;
+	scene->ray.rbegin.x = scene->x;
+	scene->ray.rbegin.y = scene->y;
+	scene->ray.rbegin.z = -2000;
+	scene->ray.ray_dir.x = 0;
+	scene->ray.ray_dir.y = 0;
+	scene->ray.ray_dir.z = 1;
+}
 
 static void		init_material(t_material **materials)
 {

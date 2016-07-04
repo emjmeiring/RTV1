@@ -35,5 +35,5 @@ t_vec3				vecreflect(t_vec3 *i, t_vec3 *n);
 void				vecclamp(t_vec3 *vec, double a, double b);
 t_vec3				vecprod(t_vec3 *a, t_vec3 *b);
 t_vec3				vecopx(t_vec3 *a, double x);
-
+double				ft_clamp(double x, double min, double max);
 #endif

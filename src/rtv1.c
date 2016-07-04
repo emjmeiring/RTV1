@@ -1,4 +1,16 @@
-#include "rtv1.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rtv1.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: simzam <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/07/04 10:49:29 by simzam            #+#    #+#             */
+/*   Updated: 2016/07/04 11:35:29 by simzam           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/rtv1.h"
 
 static int		find_closest_intersection(t_scene *scene)
 {
@@ -19,9 +31,8 @@ static int		find_normal_for_this_new_vector_at_poi(t_scene *scene)
 
 	scaled = vecopx(&scene->ray.ray_dir, scene->t);
 	new_begin = vecadd(&scene->ray.rbegin, &scaled);
-	scene->vecnorm = 
-	vecsub(&new_begin,
-			&scene->spheres[scene->sp_id].loc);
+	scene->vecnorm =
+	vecsub(&new_begin, &scene->spheres[scene->sp_id].loc);
 	scene->norm_dot_temp = vecdot(&(scene->vecnorm), &(scene->vecnorm));
 	if (scene->norm_dot_temp == 0)
 		return (-1);
@@ -31,27 +42,12 @@ static int		find_normal_for_this_new_vector_at_poi(t_scene *scene)
 
 static void		find_material_to_determine_colour(t_scene *scene)
 {
-	scene->material = 
+	scene->material =
 	scene->materials[scene->spheres[scene->sp_id].material];
 	find_value_of_light_at_this_point(scene);
 }
 
-static void		initiate_vals(t_scene *scene)
-{
-	scene->colour.red = 0;
-	scene->colour.green = 0;
-	scene->colour.blue = 0;
-	scene->c_lvl = 0;
-	scene->coef = 1.0f;
-	scene->ray.rbegin.x = scene->x;
-	scene->ray.rbegin.y = scene->y;
-	scene->ray.rbegin.z = -2000;
-	scene->ray.ray_dir.x = 0;
-	scene->ray.ray_dir.y = 0;
-	scene->ray.ray_dir.z = 1;
-}
-
-int				main(int argc, char **argv)
+int				main(void)
 {
 	t_scene		scene;
 

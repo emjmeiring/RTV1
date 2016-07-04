@@ -79,5 +79,5 @@ int					is_intersecting_sphere(t_ray *ray, t_sphere);
 int					intersecting_sphere(t_scene *scene);
 void				init_all(t_scene *scene);
 void				find_value_of_light_at_this_point(t_scene *scene);
-
+void				initiate_vals(t_scene *scene);
 #endif
