@@ -6,7 +6,7 @@
 /*   By: simzam <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/04 10:58:46 by simzam            #+#    #+#             */
-/*   Updated: 2016/07/04 10:58:56 by simzam           ###   ########.fr       */
+/*   Updated: 2016/07/04 12:09:44 by simzam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int		intersecting_sphere(t_scene *scene)
 	quad.a = vecdot(&scene->ray.ray_dir, &scene->ray.ray_dir);
 	dist = vecsub(&scene->ray.rbegin, &scene->curr_sphere.loc);
 	quad.b = vecdot(&scene->ray.ray_dir, &dist);
-	quad.c = vecdot(&dist, &dist) - (scene->curr_sphere.radius * scene->curr_sphere.radius);
+	quad.c = vecdot(&dist, &dist) - (scene->curr_sphere.radius *
+				scene->curr_sphere.radius);
 	quad.discriminant = quad.b * quad.b - 4 * quad.a * quad.c;
 	if (quad.discriminant < 0)
 		return (FALSE);

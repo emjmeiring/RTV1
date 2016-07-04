@@ -6,7 +6,7 @@
 #    By: simzam <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/06/10 09:17:10 by simzam            #+#    #+#              #
-#    Updated: 2016/07/04 11:56:39 by simzam           ###   ########.fr        #
+#    Updated: 2016/07/04 12:05:18 by simzam           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 		@$(CC) $(FLAG) $(OBJ) -o $@ $(INC) $(MLX)
-		@echo "Manufacturing the executable \033[31m$@\033[0m..."
+		@echo "Manufactured\t\033[31m$@\033[0m..."
 
 clean:
 		@echo "Cleaning\t\033[34m$(NAME)\033[m"

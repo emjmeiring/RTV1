@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rtv1.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: simzam <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/07/04 13:21:15 by simzam            #+#    #+#             */
+/*   Updated: 2016/07/04 13:22:47 by simzam           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef RTV1_H
 #define RTV1_H
 #define TRUE 1
@@ -80,4 +92,5 @@ int					intersecting_sphere(t_scene *scene);
 void				init_all(t_scene *scene);
 void				find_value_of_light_at_this_point(t_scene *scene);
 void				initiate_vals(t_scene *scene);
+void				saveppm(char *filename, unsigned char *img, int width, int height);
 #endif

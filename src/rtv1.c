@@ -6,10 +6,11 @@
 /*   By: simzam <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/04 10:49:29 by simzam            #+#    #+#             */
-/*   Updated: 2016/07/04 11:35:29 by simzam           ###   ########.fr       */
+/*   Updated: 2016/07/04 13:33:41 by simzam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#define min(A, B) ((A) >= (B)) ? A : B
 #include "../includes/rtv1.h"
 
 static int		find_closest_intersection(t_scene *scene)
@@ -71,7 +72,12 @@ int				main(void)
 					find_material_to_determine_colour(&scene);
 				}
 			}
+			mlx_get_data_addr(scene.mlx.img, &scene.mlx.bpp, &scene.mlx.size_line, &scene.mlx.endian);
+			scene.mlx.img_addr[scene.x * scene.mlx.bpp / 8 + scene.y * scene.mlx.size_line] = (unsigned char)min(scene.colour.red * 255, 255);
+			scene.mlx.img_addr[scene.x * scene.mlx.bpp / 8 + scene.y * scene.mlx.size_line]  = (unsigned char)min(scene.colour.green * 255, 255);
+			scene.mlx.img_addr[scene.x * scene.mlx.bpp / 8 + scene.y * scene.mlx.size_line] = (unsigned char)min(scene.colour.blue * 255, 255);
 		}
 	}
+	saveppm("map", (unsigned char *)scene.mlx.img_addr, WIDTH, HEIGH);
 	return (0);
 }
