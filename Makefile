@@ -17,7 +17,7 @@ NAME = rtv1
 FLAG = -Wall -Wextra -g
 
 SRC = src/init_stuff.c src/intersections.c src/iomanips.c src/lighting.c \
-	  src/rtv1.c utils/ft_clamp.c utils/ft_vec.c utils/ft_vec2.c utils/ft_vec3.c src/image_manager.c src/ray_tracer.c
+	  src/rtv1.c utils/ft_clamp.c utils/ft_vec.c utils/ft_vec2.c utils/ft_vec3.c src/ray_tracer.c
 
 RM = rm -f
 

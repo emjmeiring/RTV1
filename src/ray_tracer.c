@@ -1,10 +1,11 @@
 #include "rtv1.h"
+#include <stdio.h>
 
 void	construct_an_image_and_put_it_on_window(t_scene *scene)
 {
 	int		pos;
 
-	pos = scene->x * scene->mlx.bpp / 8 + scene->y * scene->mlx.size_line;
+	pos = (scene->x * scene->mlx.bpp / 8) + scene->y * scene->mlx.size_line;
 	scene->mlx.img_addr =
 	mlx_get_data_addr(scene->mlx.img, &scene->mlx.bpp,
 	&scene->mlx.size_line, &scene->mlx.endian);
@@ -50,8 +51,11 @@ static int		find_closest_intersection(t_scene *scene)
 	i = -1;
 	scene->sp_id = -1;
 	while (++i < 3)
+	{
+		scene->curr_sphere = scene->spheres[i];
 		if (intersecting_sphere(scene))
 			scene->sp_id = i;
+	}
 	return (scene->sp_id);
 }
 
@@ -76,8 +80,7 @@ void	follow_up_on_the_ray(t_scene *scene)
 					find_material_to_determine_colour(scene);
 				}
 			}
-			if (scene->c_lvl != 15)
-				construct_an_image_and_put_it_on_window(scene);
+			construct_an_image_and_put_it_on_window(scene);
 		}
 	}
 }
