@@ -76,6 +76,8 @@ typedef struct 		s_environment
 	t_ray			ray;
 	t_ray			ray_scaled;
 	t_vec3			ray_new_start;
+    t_quad			quad;
+    t_vec3			dist;
 	t_vec3			vecnorm;
 	t_colour		colour;
 	t_material		material;

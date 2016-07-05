@@ -6,7 +6,7 @@
 /*   By: simzam <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/04 10:58:23 by simzam            #+#    #+#             */
-/*   Updated: 2016/07/04 12:05:28 by simzam           ###   ########.fr       */
+/*   Updated: 2016/07/05 12:13:02 by simzam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void		initiate_vals(t_scene *scene)
 	scene->ray.ray_dir.z = 1;
 }
 
-static void		init_material(t_material **materials)
+void		init_material(t_material **materials)
 {
 	(*materials)[0].diffuse.red = 1;
 	(*materials)[0].diffuse.green = 0;
@@ -43,7 +43,7 @@ static void		init_material(t_material **materials)
 	(*materials)[2].reflection = 0.9f;
 }
 
-static void		init_sphere(t_sphere **spheres)
+void		init_sphere(t_sphere **spheres)
 {
 	(*spheres)[0].loc.x = 200;
 	(*spheres)[0].loc.y = 300;
@@ -62,7 +62,7 @@ static void		init_sphere(t_sphere **spheres)
 	(*spheres)[2].material = 2;
 }
 
-static void		init_lights(t_light **lights)
+void		init_lights(t_light **lights)
 {
 	(*lights)[0].loc.x = 0;
 	(*lights)[0].loc.y = 240;
@@ -84,7 +84,7 @@ static void		init_lights(t_light **lights)
 	(*lights)[2].intensity.blue = 1;
 }
 
-static void		init_mlx(t_mlx *mlx)
+void		init_mlx(t_mlx *mlx)
 {
 	mlx->mlx_con = (void *)malloc(sizeof(void *));
 	mlx->mlx_win = (void *)malloc(sizeof(void *));
@@ -99,9 +99,7 @@ static void		init_mlx(t_mlx *mlx)
 
 void			init_all(t_scene *scene)
 {
-	scene->y = -1;
-	scene->x = -1;
-	scene->t = 20000.0f;
+	scene->quad.prev_root = 20000.0f;
 	scene->sp_id = -1;
 	scene->spheres = (t_sphere *)malloc(sizeof(t_sphere) * 3);
 	scene->lights = (t_light *)malloc(sizeof(t_light) * 3);

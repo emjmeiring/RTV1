@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ray_tracer.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: simzam <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/07/05 11:26:13 by simzam            #+#    #+#             */
+/*   Updated: 2016/07/05 12:14:53 by simzam           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rtv1.h"
 #include <stdio.h>
 
@@ -7,11 +19,14 @@ void	construct_an_image_and_put_it_on_window(t_scene *scene)
 
 	pos = (scene->x * scene->mlx.bpp / 8) + (scene->y * scene->mlx.size_line);
 	scene->mlx.img_addr[pos] =
-	(unsigned char)min(scene->colour.red * 255, 255);
+	mlx_get_color_value(&scene->mlx.mlx_con,
+						(unsigned char)min(scene->colour.red * 255, 255));
 	scene->mlx.img_addr[pos + 1]  =
-	mlx_get_color_value(&scene->mlx.mlx_con,(unsigned char)min(scene->colour.green * 255, 255));
+	mlx_get_color_value(&scene->mlx.mlx_con,
+						(unsigned char)min(scene->colour.green * 255, 255));
 	scene->mlx.img_addr[pos + 2] =
-	mlx_get_color_value(&scene->mlx.mlx_con,(unsigned char)min(scene->colour.blue * 255, 255));
+	mlx_get_color_value(&scene->mlx.mlx_con,
+                        (unsigned char)min(scene->colour.blue * 255, 255));
 }
 
 static void		find_material_to_determine_colour(t_scene *scene)
@@ -56,6 +71,7 @@ static int		find_closest_intersection(t_scene *scene)
 
 void	follow_up_on_the_ray(t_scene *scene)
 {
+	//scene->y = -1;
 	while (++scene->y < HEIGH)
 	{
 		scene->x = -1;
@@ -74,11 +90,10 @@ void	follow_up_on_the_ray(t_scene *scene)
 					find_material_to_determine_colour(scene);
 				}
 			}
-			construct_an_image_and_put_it_on_window(scene);
+            construct_an_image_and_put_it_on_window(scene);
 		}
-		mlx_put_image_to_window(scene->mlx.mlx_con,\
+	}
+	mlx_put_image_to_window(scene->mlx.mlx_con,\
 							scene->mlx.mlx_win,\
 							scene->mlx.img, 0, 0);
-	}
-	mlx_loop(scene->mlx.mlx_con);
 }

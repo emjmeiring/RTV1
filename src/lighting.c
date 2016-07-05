@@ -6,7 +6,7 @@
 /*   By: simzam <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/04 10:59:26 by simzam            #+#    #+#             */
-/*   Updated: 2016/07/04 10:59:30 by simzam           ###   ########.fr       */
+/*   Updated: 2016/07/05 12:04:16 by simzam           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void			find_value_of_light_at_this_point(t_scene *scene)
 		if (vecdot(&distance, &scene->vecnorm) > 0.0f)
 		{
 			t = sqrt(vecdot(&distance, &distance));
-			if (t > 0.0f)
+			if (scene->quad.prev_root > 0.0f)
 			{
 				light_ray.rbegin = scene->ray_new_start;
 				light_ray.ray_dir = vecopx(&distance, (1 / t));
