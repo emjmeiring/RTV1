@@ -48,7 +48,7 @@ void			find_value_of_light_at_this_point(t_scene *scene)
 	while (++j < 3)
 	{
 		scene->curr_light = scene->lights[j];
-		vecsub(&scene->curr_light.loc, &scene->ray_new_start);
+		distance = vecsub(&scene->curr_light.loc, &scene->ray_new_start);
 		if (vecdot(&distance, &scene->vecnorm) > 0.0f)
 		{
 			t = sqrt(vecdot(&distance, &distance));

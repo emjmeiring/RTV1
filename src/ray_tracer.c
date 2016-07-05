@@ -5,20 +5,13 @@ void	construct_an_image_and_put_it_on_window(t_scene *scene)
 {
 	int		pos;
 
-	pos = (scene->x * scene->mlx.bpp / 8) + scene->y * scene->mlx.size_line;
-	scene->mlx.img_addr =
-	mlx_get_data_addr(scene->mlx.img, &scene->mlx.bpp,
-	&scene->mlx.size_line, &scene->mlx.endian);
+	pos = (scene->x * scene->mlx.bpp / 8) + (scene->y * scene->mlx.size_line);
 	scene->mlx.img_addr[pos] =
 	(unsigned char)min(scene->colour.red * 255, 255);
 	scene->mlx.img_addr[pos + 1]  =
-	(unsigned char)min(scene->colour.green * 255, 255);
+	mlx_get_color_value(&scene->mlx.mlx_con,(unsigned char)min(scene->colour.green * 255, 255));
 	scene->mlx.img_addr[pos + 2] =
-	(unsigned char)min(scene->colour.blue * 255, 255);
-	mlx_put_image_to_window(scene->mlx.mlx_con,
-							scene->mlx.mlx_win,
-							scene->mlx.img, 200, 200);
-	mlx_loop(scene->mlx.mlx_con);
+	mlx_get_color_value(&scene->mlx.mlx_con,(unsigned char)min(scene->colour.blue * 255, 255));
 }
 
 static void		find_material_to_determine_colour(t_scene *scene)
@@ -56,6 +49,8 @@ static int		find_closest_intersection(t_scene *scene)
 		if (intersecting_sphere(scene))
 			scene->sp_id = i;
 	}
+	if (scene->sp_id > 0)
+		printf("sp_id: %d\n", scene->sp_id);
 	return (scene->sp_id);
 }
 
@@ -66,8 +61,6 @@ void	follow_up_on_the_ray(t_scene *scene)
 		scene->x = -1;
 		while (++scene->x < WIDTH)
 		{
-			scene->c_lvl = 0;
-			scene->coef = 1.0f;
 			initiate_vals(scene);
 			while (scene->coef > 0.0f && scene->c_lvl < 15)
 			{
@@ -76,11 +69,16 @@ void	follow_up_on_the_ray(t_scene *scene)
 				else if (find_normal_for_this_new_vector_at_poi(scene) == 42)
 				{
 					scene->norm_dot_temp = 1.0f / sqrtf(scene->norm_dot_temp);
-					scene->vecnorm = vecopx(&scene->vecnorm, scene->norm_dot_temp);
+					scene->vecnorm =
+					vecopx(&scene->vecnorm, scene->norm_dot_temp);
 					find_material_to_determine_colour(scene);
 				}
 			}
 			construct_an_image_and_put_it_on_window(scene);
 		}
+		mlx_put_image_to_window(scene->mlx.mlx_con,\
+							scene->mlx.mlx_win,\
+							scene->mlx.img, 0, 0);
 	}
+	mlx_loop(scene->mlx.mlx_con);
 }

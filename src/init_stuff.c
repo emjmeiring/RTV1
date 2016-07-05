@@ -90,14 +90,17 @@ static void		init_mlx(t_mlx *mlx)
 	mlx->mlx_win = (void *)malloc(sizeof(void *));
 	mlx->img_addr = (char *)malloc(sizeof(void *));
 	mlx->mlx_con = mlx_init();
+	mlx->mlx_win =
+	mlx_new_window(mlx->mlx_con, WIDTH, HEIGH, "<The Raytracer/>");
 	mlx->img = mlx_new_image(mlx->mlx_con, WIDTH, HEIGH);
-	mlx->mlx_win = mlx_new_window(mlx->mlx_con, WIDTH, HEIGH,
-					"<The Raytracer/>");
+	mlx->img_addr =
+	mlx_get_data_addr(mlx->img, &mlx->bpp, &mlx->size_line, &mlx->endian);
 }
 
 void			init_all(t_scene *scene)
 {
-	scene->y = 0;
+	scene->y = -1;
+	scene->x = -1;
 	scene->t = 20000.0f;
 	scene->sp_id = -1;
 	scene->spheres = (t_sphere *)malloc(sizeof(t_sphere) * 3);
